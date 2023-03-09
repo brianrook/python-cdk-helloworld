@@ -3,7 +3,7 @@ name: Main Build and Deploy
 on:
 
   push:
-    branches: [ main, devsandbox ]
+    branches: [ main ]
   workflow_dispatch:
     inputs:
       image_tag:
@@ -50,6 +50,7 @@ jobs:
   build:
     name: Build Image
     runs-on: ubuntu-latest
+    environment: brianrook-aws
     needs: [version]
     env:
       IMAGE_TAG: ${{needs.version.outputs.image_tag}}
@@ -83,6 +84,7 @@ jobs:
   deploy:
     name: Deploy via CDK
     runs-on: ubuntu-latest
+    environment: brianrook-aws
     needs: [build, version]
     env:
       IMAGE_TAG: ${{needs.version.outputs.image_tag}}
