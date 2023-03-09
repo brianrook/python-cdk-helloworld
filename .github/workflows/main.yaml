@@ -68,7 +68,7 @@ jobs:
         with:
           cdk_subcommand: 'deploy'
           cdk_stack: 'PythonCdkHelloworldStack'
-          cdk_args: "--require-approval never --parameters image_tag:$IMAGE_TAG"
+          cdk_args: "--require-approval never"
           actions_comment: false
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}

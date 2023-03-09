@@ -2,8 +2,9 @@ from aws_cdk import (
     # Duration,
     Stack,
     aws_lambda as _lambda,
-    aws_apigateway as apigateway,
+    aws_apigateway as apigateway, CfnParameter,
 )
+import os
 from aws_cdk.aws_ecr import Repository
 from constructs import Construct
 
@@ -13,12 +14,13 @@ class PythonCdkHelloworldStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        self.build_lambda_func(kwargs.get("image_tag"))
+        self.build_lambda_func()
 
-    def build_lambda_func(self, image_tag):
+    def build_lambda_func(self):
+        image_tag = os.environ["IMAGE_TAG","latest"]
         self.ecr_image = _lambda.DockerImageCode.from_ecr(
             repository=Repository.from_repository_name(self, "helloWorld-cdk-repository", "python-cdk-helloworld"),
-            tag=image_tag
+            tag_or_digest=image_tag
         )
         self.prediction_lambda = _lambda.DockerImageFunction(
             scope=self,
