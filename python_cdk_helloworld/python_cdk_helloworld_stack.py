@@ -17,7 +17,7 @@ class PythonCdkHelloworldStack(Stack):
         self.build_lambda_func()
 
     def build_lambda_func(self):
-        image_tag = os.environ["IMAGE_TAG","latest"]
+        image_tag = os.getenv("IMAGE_TAG", "latest")
         self.ecr_image = _lambda.DockerImageCode.from_ecr(
             repository=Repository.from_repository_name(self, "helloWorld-cdk-repository", "python-cdk-helloworld"),
             tag_or_digest=image_tag
