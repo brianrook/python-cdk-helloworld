@@ -4,3 +4,4 @@ uvicorn
 httpx
 python-json-logger
 pydantic~=1.10.5
+datadog-lambda
