@@ -57,7 +57,7 @@ jobs:
   build:
     name: Build Image
     runs-on: ubuntu-latest
-    environment: ${{github.event.inputs.environment:-"brianrook-aws"}}
+    environment: ${{github.event.inputs.environment || "brianrook-aws"}}
     needs: [version]
     env:
       IMAGE_TAG: ${{needs.version.outputs.image_tag}}
@@ -91,7 +91,7 @@ jobs:
   deploy:
     name: Deploy via CDK
     runs-on: ubuntu-latest
-    environment: ${{github.event.inputs.environment:-"brianrook-aws"}}
+    environment: ${{github.event.inputs.environment || "brianrook-aws"}}
     needs: [build, version]
     env:
       IMAGE_TAG: ${{needs.version.outputs.image_tag}}
