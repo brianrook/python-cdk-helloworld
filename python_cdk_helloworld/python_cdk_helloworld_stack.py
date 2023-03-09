@@ -22,6 +22,6 @@ class PythonCdkHelloworldStack(Stack):
             # Use aws_cdk.aws_lambda.DockerImageCode.from_image_asset to build
             # a docker image on deployment
             code=_lambda.DockerImageCode.from_ecr(
-                repository=Repository("arn:aws:ecr:us-west-2:108452827623:repository/python-cdk-helloworld")
+                repository=Repository.from_repository_name(self, "helloWorld-cdk-repository", "python-cdk-helloworld")
             ),
         )

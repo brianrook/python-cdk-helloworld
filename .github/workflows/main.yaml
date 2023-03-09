@@ -50,7 +50,7 @@ jobs:
         run: |
           cd python_cdk_helloworld/HelloWorldLambda
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --all-tags
 
   deploy:
     name: Deploy via CDK
