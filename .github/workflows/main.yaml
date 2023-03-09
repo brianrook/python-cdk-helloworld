@@ -3,7 +3,7 @@ name: Main Build and Deploy
 on:
 
   push:
-    branches: [ main, devsandbox ]
+    branches: [ main ]
   workflow_dispatch:
     inputs:
       image_tag:
