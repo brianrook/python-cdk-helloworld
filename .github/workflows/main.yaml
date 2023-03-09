@@ -16,7 +16,6 @@ jobs:
   version:
     name: Get the version
     runs-on: ubuntu-latest
-    needs: [build]
     env:
       IMAGE_TAG: ${{github.event.inputs.image_tag}}
     outputs:
