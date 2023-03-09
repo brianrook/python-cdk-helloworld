@@ -7,6 +7,7 @@ from aws_cdk import (
 from aws_cdk.aws_ecr import Repository
 from constructs import Construct
 
+
 class PythonCdkHelloworldStack(Stack):
 
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
@@ -27,12 +28,12 @@ class PythonCdkHelloworldStack(Stack):
             ),
         )
 
-        # api = apigateway.RestApi(self, "helloworld-cdk-api",
-        #                          rest_api_name="Hello World CDK Service",
-        #                          description="This service fronts helloworld with CDK.")
-        #
-        # get_helloworld_integration = apigateway.LambdaIntegration(
-        #                         self.prediction_lambda,
-        #                         request_templates={"application/json": '{ "statusCode": "200" }'})
-        #
-        # api.root.add_method("GET", get_helloworld_integration)
+        api = apigateway.RestApi(self, "helloworld-cdk-api",
+                                 rest_api_name="Hello World CDK Service",
+                                 description="This service fronts helloworld with CDK.")
+
+        get_helloworld_integration = apigateway.LambdaIntegration(
+            self.prediction_lambda,
+            request_templates={"application/json": '{ "statusCode": "200" }'})
+
+        api.root.add_method("GET", get_helloworld_integration)
