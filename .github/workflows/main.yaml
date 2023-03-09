@@ -3,7 +3,7 @@ name: Main Build and Deploy
 on:
 
   push:
-    branches: [ main ]
+    branches: [ main, devsandbox ]
   workflow_dispatch:
     inputs:
       image_tag:
@@ -22,6 +22,7 @@ jobs:
 
   version:
     name: Get the version
+    if: [ -z ${github.event.inputs.image_tag} ]
     runs-on: ubuntu-latest
     env:
       IMAGE_TAG: ${{github.event.inputs.image_tag}}
@@ -46,11 +47,8 @@ jobs:
       - name: Set Returned Version
         id: set-version
         run: |
-          echo "${IMAGE_TAG}"
           echo "${RELEASE_VERSION}"
-          if [ -z "${IMAGE_TAG}" ]; then IMAGE_TAG="${RELEASE_VERSION}"; fi
-          echo "${IMAGE_TAG}"
-          echo "image_tag=${IMAGE_TAG}" >> $GITHUB_OUTPUT
+          echo "image_tag=${RELEASE_VERSION}" >> $GITHUB_OUTPUT
           
   
 
@@ -60,7 +58,7 @@ jobs:
     environment: ${{github.event.inputs.environment || 'brianrook-aws'}}
     needs: [version]
     env:
-      IMAGE_TAG: ${{needs.version.outputs.image_tag}}
+      IMAGE_TAG: ${{needs.version.outputs.image_tag || github.event.inputs.image_tag}}
 
     steps:
 
@@ -94,7 +92,7 @@ jobs:
     environment: ${{github.event.inputs.environment || 'brianrook-aws' }}
     needs: [build, version]
     env:
-      IMAGE_TAG: ${{needs.version.outputs.image_tag}}
+      IMAGE_TAG: ${{needs.version.outputs.image_tag || github.event.inputs.image_tag}}
 
     steps:
       - name: Echo image tag
