@@ -40,9 +40,9 @@ jobs:
         id: set-version
         run: |
           echo "${IMAGE_TAG}"
-          echo "${steps.semantic.outputs.release-version}"
-          IMAGE_TAG=${IMAGE_TAG:=steps.semantic.outputs.release-version}
-          echo "{image_tag}={IMAGE_TAG}" >> $GITHUB_OUTPUT
+          echo "${RELEASE_VERSION}"
+          IMAGE_TAG=${IMAGE_TAG:=RELEASE_VERSION}
+          echo "{image_tag}=${IMAGE_TAG}" >> $GITHUB_OUTPUT
           
   
 
