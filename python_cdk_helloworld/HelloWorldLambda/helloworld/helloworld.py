@@ -3,8 +3,7 @@ import logging.config
 
 from pydantic import BaseModel
 
-logging.config.fileConfig('logging.conf')
-logger = logging.getLogger("helloworld")
+logger = logging.getLogger(__name__)
 
 
 class MessageResponse(BaseModel):

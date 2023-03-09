@@ -1,10 +1,12 @@
 import logging
 import logging.config
 
+logging.config.fileConfig('logging.conf')
+
 from helloworld.helloworld import HelloWorld
 
-logging.config.fileConfig('logging.conf')
-logger = logging.getLogger("main")
+
+logger = logging.getLogger(__name__)
 
 
 def handler(event, context):
