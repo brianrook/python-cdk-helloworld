@@ -54,11 +54,12 @@ jobs:
 
   build:
     name: Build Image
+    if: null == github.event.inputs.image_tag
     runs-on: ubuntu-latest
     environment: ${{github.event.inputs.environment || 'brianrook-aws'}}
     needs: [version]
     env:
-      IMAGE_TAG: ${{needs.version.outputs.image_tag || github.event.inputs.image_tag}}
+      IMAGE_TAG: ${{needs.version.outputs.image_tag}}
 
     steps:
 
