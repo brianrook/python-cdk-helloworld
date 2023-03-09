@@ -1,7 +1,8 @@
 from aws_cdk import (
     # Duration,
     Stack,
-    aws_lambda as _lambda
+    aws_lambda as _lambda,
+    aws_apigateway as apigateway,
 )
 from aws_cdk.aws_ecr import Repository
 from constructs import Construct
@@ -25,3 +26,13 @@ class PythonCdkHelloworldStack(Stack):
                 repository=Repository.from_repository_name(self, "helloWorld-cdk-repository", "python-cdk-helloworld")
             ),
         )
+
+        # api = apigateway.RestApi(self, "helloworld-cdk-api",
+        #                          rest_api_name="Hello World CDK Service",
+        #                          description="This service fronts helloworld with CDK.")
+        #
+        # get_helloworld_integration = apigateway.LambdaIntegration(
+        #                         self.prediction_lambda,
+        #                         request_templates={"application/json": '{ "statusCode": "200" }'})
+        #
+        # api.root.add_method("GET", get_helloworld_integration)
