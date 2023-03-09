@@ -22,7 +22,6 @@ jobs:
 
   version:
     name: Get the version
-    if: null == github.event.inputs.image_tag
     runs-on: ubuntu-latest
     env:
       IMAGE_TAG: ${{github.event.inputs.image_tag}}
@@ -54,7 +53,6 @@ jobs:
 
   build:
     name: Build Image
-    if: null == github.event.inputs.image_tag
     runs-on: ubuntu-latest
     environment: ${{github.event.inputs.environment || 'brianrook-aws'}}
     needs: [version]
