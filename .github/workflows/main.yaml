@@ -23,8 +23,8 @@ jobs:
       image_tag: ${{ steps.set-version.outputs.image_tag }}
 
     steps:
+
       - name: Get Release Version
-        if: [[ -z ${IMAGE_TAG} ]]
         id: semantic
         uses: docker://ghcr.io/codfish/semantic-release-action:v2
         with:
