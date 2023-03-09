@@ -22,6 +22,8 @@ jobs:
       image_tag: ${{ steps.set-version.outputs.image_tag }}
 
     steps:
+      - name: Check out code
+        uses: actions/checkout@v3
 
       - name: Get Release Version
         id: semantic
