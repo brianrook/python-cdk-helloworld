@@ -10,6 +10,13 @@ on:
         type: string
         description: Image tag to use
         required: true
+      environment:
+        type: choice
+        description: Environment to deploy to
+        options:
+          - brianrook-aws
+          - devsandbox
+        required: true
 
 jobs:
 
@@ -50,7 +57,7 @@ jobs:
   build:
     name: Build Image
     runs-on: ubuntu-latest
-    environment: brianrook-aws
+    environment: ${{github.event.inputs.environment:-"brianrook-aws"}}
     needs: [version]
     env:
       IMAGE_TAG: ${{needs.version.outputs.image_tag}}
@@ -84,7 +91,7 @@ jobs:
   deploy:
     name: Deploy via CDK
     runs-on: ubuntu-latest
-    environment: brianrook-aws
+    environment: ${{github.event.inputs.environment:-"brianrook-aws"}}
     needs: [build, version]
     env:
       IMAGE_TAG: ${{needs.version.outputs.image_tag}}
@@ -107,4 +114,4 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: 'us-west-2'
+          AWS_DEFAULT_REGION: ${{ vars.AWS_DEFAULT_REGION }}
