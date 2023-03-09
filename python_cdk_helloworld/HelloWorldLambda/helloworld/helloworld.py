@@ -1,7 +1,9 @@
 import logging
+import logging.config
 
 from pydantic import BaseModel
 
+logging.config.fileConfig('logging.conf')
 logger = logging.getLogger("helloworld")
 
 
