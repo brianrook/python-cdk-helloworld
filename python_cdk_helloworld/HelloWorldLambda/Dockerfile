@@ -5,6 +5,7 @@ COPY ./requirements.txt .
 RUN pip install -r requirements.txt --target "${LAMBDA_TASK_ROOT}"
 
 COPY lambda.py ${LAMBDA_TASK_ROOT}
+COPY logging.conf ${LAMBDA_TASK_ROOT}
 COPY ./helloworld ${LAMBDA_TASK_ROOT}/helloworld
 
 CMD [ "lambda.handler" ]

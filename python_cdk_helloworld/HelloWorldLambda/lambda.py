@@ -2,6 +2,7 @@ import logging
 
 from helloworld.helloworld import HelloWorld
 
+logging.config.fileConfig('logging.conf')
 logger = logging.getLogger("main")
 
 
