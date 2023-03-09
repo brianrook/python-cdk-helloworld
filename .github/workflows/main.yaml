@@ -45,7 +45,7 @@ jobs:
       - name: Build, tag, and push image to Amazon ECR
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ${{ github.event.repository.name }}
+          ECR_REPOSITORY: python-cdk-helloworld
           IMAGE_TAG: ${{ steps.semantic.outputs.release-version }}
         run: |
           cd python_cdk_helloworld/HelloworldLambda
