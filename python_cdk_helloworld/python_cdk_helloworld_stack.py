@@ -3,6 +3,7 @@ from aws_cdk import (
     Stack,
     aws_lambda as _lambda
 )
+from aws_cdk.aws_ecr import Repository
 from constructs import Construct
 
 class PythonCdkHelloworldStack(Stack):
@@ -21,6 +22,6 @@ class PythonCdkHelloworldStack(Stack):
             # Use aws_cdk.aws_lambda.DockerImageCode.from_image_asset to build
             # a docker image on deployment
             code=_lambda.DockerImageCode.from_ecr(
-                repository="108452827623.dkr.ecr.us-west-2.amazonaws.com/python-cdk-helloworld"
+                repository=Repository("arn:aws:ecr:us-west-2:108452827623:repository/python-cdk-helloworld")
             ),
         )
