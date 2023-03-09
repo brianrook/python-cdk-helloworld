@@ -16,6 +16,8 @@ jobs:
     #permissions to write back to github repo
     permissions:
       contents: write
+    outputs:
+      image_tag: ${{ steps.semantic.outputs.release-version }}
 
     steps:
 
@@ -66,9 +68,10 @@ jobs:
         with:
           cdk_subcommand: 'deploy'
           cdk_stack: 'PythonCdkHelloworldStack'
-          cdk_args: '--require-approval never'
+          cdk_args: "--require-approval never --parameters image_tag:$IMAGE_TAG"
           actions_comment: false
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: 'us-west-2'
+          IMAGE_TAG: ${{needs.build.outputs.image_tag}}
