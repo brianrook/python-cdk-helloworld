@@ -20,6 +20,9 @@ jobs:
       IMAGE_TAG: ${{github.event.inputs.image_tag}}
     outputs:
       image_tag: ${{ steps.set-version.outputs.image_tag }}
+    #permissions to write back to github repo
+    permissions:
+      contents: write
 
     steps:
       - name: Check out code
@@ -49,9 +52,6 @@ jobs:
     needs: [version]
     env:
       IMAGE_TAG: ${{needs.version.outputs.image_tag}}
-    #permissions to write back to github repo
-    permissions:
-      contents: write
 
     steps:
 
