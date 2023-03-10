@@ -18,4 +18,5 @@ ENV DD_SITE="us5.datadoghq.com"
 ENV DD_API_KEY="$DD_KEY"
 ENV DD_VERSION="$APP_VERSION"
 ENV DD_TRACE_ENABLED="true"
+ENV DD_SERVICE="helloWorld-cdk"
 CMD [ "datadog_lambda.handler.handler" ]
