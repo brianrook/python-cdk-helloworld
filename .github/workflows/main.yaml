@@ -82,7 +82,7 @@ jobs:
           ECR_REPOSITORY: ${{ github.event.repository.name }}
         run: |
           cd python_cdk_helloworld/HelloWorldLambda
-          docker build --build-arg DD_KEY=$DD_KEY --build-arg APP_VERSION=$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
+          docker build --build-arg DD_KEY=DD_API_KEY --build-arg APP_VERSION=$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY --all-tags
           
 
