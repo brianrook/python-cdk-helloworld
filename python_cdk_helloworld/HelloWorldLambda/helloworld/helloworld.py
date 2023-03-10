@@ -15,6 +15,6 @@ class HelloWorld:
     @staticmethod
     def getMessage():
         logger.info("request to helloworld.getmessage")
-        msgResponse = MessageResponse(message="Hello World! Demo Day, again")
+        msgResponse = MessageResponse(message="Hello World! Demo Day, again!")
         logger.debug("returning msg: %s", msgResponse.json())
         return msgResponse
