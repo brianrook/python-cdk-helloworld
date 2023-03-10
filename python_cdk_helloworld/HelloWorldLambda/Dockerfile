@@ -14,8 +14,8 @@ ARG DD_KEY
 ARG APP_VERSION
 
 ENV DD_LAMBDA_HANDLER="lambda.handler"
-ENV DD_SITE="datadoghq.com"
-ENV DD_API_KEY="$DD_KEY"
+ENV DD_SITE="us5.datadoghq.com"
+ENV DD_API_KEY="142951d5205dd5db431314539ed069a9"
 ENV DD_VERSION="$APP_VERSION"
 ENV DD_TRACE_ENABLED="true"
 CMD [ "datadog_lambda.handler.handler" ]
